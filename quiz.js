@@ -43,7 +43,22 @@ let wrongCount = 0;
 let total = 0;
 let selectedAnswer;
 
+const showResult = () => {
+    resultScreen.style.display = "block"
+    gameScreen.style.display = "none"
+
+    resultScreen.querySelector(".correct").textContent =
+        `Correct Answers: ${correctCount}`
+
+    resultScreen.querySelector(".wrong").textContent =
+        `Wrong Answers: ${wrongCount}`
+
+    resultScreen.querySelector(".score").textContent =
+        `Score: ${(correctCount - wrongCount) * 10}`
+}
+
 const showQuestion = (qNumber) => {
+    if (qIndex === data.length) return showResult()
     selectedAnswer = null;
     question.textContent = data[qNumber].question
     answersContainer.innerHTML = data[qNumber].answers.map((item, index) =>
